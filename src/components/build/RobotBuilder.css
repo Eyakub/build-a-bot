@@ -86,3 +86,36 @@
   .right .next-selector {
     right: -3px;
   }
+
+  .robot-name{
+    position: absolute;
+    top: -25px;
+    text-align: center;
+    width: 100%;
+  }
+
+  .sale{
+    color: red;
+  }
+
+  .content {
+    position: relative;
+  }
+
+  .add-to-cart{
+    position: absolute;
+    right: 30px;
+    width: 220px;
+    padding: 3px;
+    font-size: 16px;
+  }
+
+  .td, th{
+    text-align: left;
+    padding: 5px;
+    padding-right: 20px;
+  }
+
+  .const{
+    text-align: right;
+  }

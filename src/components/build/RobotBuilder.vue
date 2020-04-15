@@ -2,7 +2,8 @@
   <div class="content">
     <button class="add-to-cart" @click="addToCart()">Add to Cart</button>
     <div class="top-row">
-      <div class="top part">
+      <!-- <div class="top part" :style="[headBorderStyle, moreStyle]"> -->
+      <div :class="[saleBorderClass, 'top', 'part']">
         <div class="robot-name">
           {{ selectedRobot.head.title}}
           <span v-if="selectedRobot.head.onSale" class="sale">Sale</span>
@@ -50,7 +51,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for='(robot, index) in cart' :key='index'>
+          <tr v-for="(robot, index) in cart" :key="index">
             <td>{{robot.head.title}}</td>
             <td class="cost">{{ robot.cost }}</td>
           </tr>
@@ -86,6 +87,16 @@ export default {
         rightArm: availableParts.arms[this.selectedRightArmIndex],
         base: availableParts.bases[this.selectedBaseIndex]
       };
+    },
+    headBorderStyle() {
+      return {
+        border: this.selectedRobot.head.onSale
+          ? "3px solid red"
+          : "3px solid #aaa"
+      };
+    },
+    saleBorderClass(){
+      return this.selectedRobot.head.onSale ? 'sale-border': '';
     }
   },
 
@@ -177,11 +188,11 @@ export default {
         robot.torso.cost +
         robot.rightArm.cost +
         robot.base.cost;
-      
+
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way
-      this.cart.push(Object.assign({}, robot, { cost }))
-      console.log(this.cart)
+      this.cart.push(Object.assign({}, robot, { cost }));
+      console.log(this.cart);
     }
   }
 };

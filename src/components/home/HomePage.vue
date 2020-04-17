@@ -7,6 +7,9 @@
         alt=""
         aria-hidden="true"
       />
+      <div get-started>
+        <router-link to='/build'>Get started</router-link>
+      </div>
     </div>
     
   </div>

@@ -83,10 +83,20 @@
 import availableParts from "../../data/parts";
 import createdHookMixin from "./created-hook-mixin";
 import PartSelector from "./PartSelector.vue";
-import CollapsibleSection from '../shared/CollapsibleSection.vue';
+import CollapsibleSection from "../shared/CollapsibleSection.vue";
 
 export default {
   name: "RobotBuilder",
+  beforeRouteLeave(to, from, next) {
+    if (this.addedToCart) {
+      next(true);
+    } else {
+      const response = confirm(
+        "You have not added your robot to your card, are you sure you want to leave?"
+      );
+      next(response)
+    }
+  },
   components: { PartSelector, CollapsibleSection },
   data() {
     return {
@@ -97,7 +107,8 @@ export default {
         leftArm: {},
         torso: {},
         rightArm: {},
-        base: {}
+        base: {},
+        addedToCart: false
       }
     };
   },
@@ -130,6 +141,7 @@ export default {
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way
       this.cart.push(Object.assign({}, robot, { cost }));
+      this.addedToCart = true;
       console.log(this.cart);
     }
   }

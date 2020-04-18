@@ -123,6 +123,7 @@ export default {
           : "3px solid #aaa"
       };
     },
+    
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? "sale-border" : "";
     }

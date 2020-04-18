@@ -70,7 +70,14 @@ export default {
     showPartInfo(){
       // as we enjected our VUE app with router in Main.JS file
       // we can get the router url by this
-      this.$router.push('/parts');
+      // this.$router.push('/parts');
+      this.$router.push({
+        name: 'Parts', 
+        params: {
+          id: this.selectedPart.id,
+          partType: this.selectedPart.type,
+        }
+      })
     },
   }
 };

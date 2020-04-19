@@ -129,7 +129,7 @@ export default {
         robot.rightArm.cost +
         robot.base.cost;
 
-      this.$store.commit('addRobotToCart', Object.assign({}, robot, { cost }))
+      this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }))
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way
       // this.cart.push();

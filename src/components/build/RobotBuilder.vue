@@ -98,7 +98,7 @@ export default {
 
   mixins: [createdHookMixin],
   created() {
-    this.$store.dispatch("getParts");
+    this.$store.dispatch("robots/getParts");
   },
   computed: {
     headBorderStyle() {
@@ -131,7 +131,7 @@ export default {
       // storing data to cart thn dispatch data 
       // from the store thn go to the CART router(then comes from axios return)
       this.$store
-        .dispatch("addRobotToCart", Object.assign({}, robot, { cost }))
+        .dispatch("robots/addRobotToCart", Object.assign({}, robot, { cost }))
         .then(() => this.$router.push("/cart"));
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way

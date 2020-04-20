@@ -20,9 +20,13 @@ export default {
      * store them in state
      */
     signIn({commit}){
+      console.log('sign in')
       axios.post('/api/sign-in')
       .then(result => commit('updateCurrentUser', result.data))
       .catch(console.error);
     },
+    addRobotToCart(){
+      console.log('Users added robot to cart')
+    }
   },
 }

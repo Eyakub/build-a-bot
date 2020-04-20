@@ -42,7 +42,9 @@ export default {
 			return this.$store.state.robots.cart;
 		},
 		cartSaleItems(){
-			return this.$store.getters.cartSaleItems;
+      // return this.$store.getter.cartSaleItems
+      // accessing getters in namespaced modules this way
+			return this.$store.getters['robots/cartSaleItems'];
 		}
 	}
 };

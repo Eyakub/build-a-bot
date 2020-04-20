@@ -102,7 +102,12 @@
   }
 
   .sale{
-    color: red;
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: red;;
+    color: white;
+    padding: 3px;
   }
 
   .content {

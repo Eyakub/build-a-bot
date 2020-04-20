@@ -11,7 +11,7 @@
       <tbody>
         <tr v-for="(robot, index) in cart" :key="index">
           <td class="robot-title">{{robot.head.title}}</td>
-          <td class="cost">{{robot.cost}}</td>
+          <td class="cost">{{robot.cost | currency('$')}}</td>
         </tr>
       </tbody>
     </table>
@@ -27,7 +27,7 @@
       <tbody>
         <tr v-for="(robot, index) in cartSaleItems" :key="index">
           <td class="robot-title">{{robot.head.title}}</td>
-          <td class="cost">{{robot.cost}}</td>
+          <td class="cost">{{robot.cost | currency('$')}}</td>
         </tr>
       </tbody>
     </table>
@@ -35,6 +35,8 @@
 </template>
 
 <script>
+import currencyFilter from '../shared/currency-filter';
+
 export default {
 	name: "Cart",
 	computed: {
@@ -46,7 +48,10 @@ export default {
       // accessing getters in namespaced modules this way
 			return this.$store.getters['robots/cartSaleItems'];
 		}
-	}
+  },
+  filters: {
+    currency: currencyFilter,
+  },
 };
 </script>
 

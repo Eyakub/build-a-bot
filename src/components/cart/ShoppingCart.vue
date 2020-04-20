@@ -35,7 +35,8 @@
 </template>
 
 <script>
-import currencyFilter from '../shared/currency-filter';
+// as we are declaring it globally, doest need this anymore
+// import currencyFilter from '../shared/currency-filter';
 
 export default {
 	name: "Cart",
@@ -48,9 +49,6 @@ export default {
       // accessing getters in namespaced modules this way
 			return this.$store.getters['robots/cartSaleItems'];
 		}
-  },
-  filters: {
-    currency: currencyFilter,
   },
 };
 </script>

@@ -67,6 +67,7 @@
 import createdHookMixin from "./created-hook-mixin";
 import PartSelector from "./PartSelector.vue";
 import CollapsibleSection from "../shared/CollapsibleSection.vue";
+import {mapActions, mapMutations} from 'vuex';
 
 export default {
   name: "RobotBuilder",
@@ -98,7 +99,11 @@ export default {
 
   mixins: [createdHookMixin],
   created() {
-    this.$store.dispatch("robots/getParts");
+    //this.$store.dispatch("robots/getParts");
+
+    /** we dont have to dispatch this way, 
+     * as mapActions takes care of dispatch */
+    this.getParts();
   },
   computed: {
     headBorderStyle() {
@@ -130,15 +135,16 @@ export default {
 
       // storing data to cart thn dispatch data 
       // from the store thn go to the CART router(then comes from axios return)
-      this.$store
-        .dispatch("robots/addRobotToCart", Object.assign({}, robot, { cost }))
+      this.addRobotToCart(Object.assign({}, robot, { cost }))
         .then(() => this.$router.push("/cart"));
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way
       // this.cart.push();
       this.addedToCart = true;
       console.log(this.cart);
-    }
+    },
+    ...mapActions('robots', ['getParts', 'addRobotToCart']),
+    ...mapMutations('robots', ['someMutations'])
   }
 };
 </script>

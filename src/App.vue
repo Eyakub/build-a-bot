@@ -1,5 +1,17 @@
 <template>
   <div id="app" class="main">
+    <!-- Root foo: {{ rootFoo }}
+    <br />
+    Robot foo: {{ robotsFoo }}
+    <br />
+    User foo: {{ usersFoo }}
+    <br />
+    <br />
+    Root getter: {{ rootGetterFoo }}
+    <br />
+    Robot getter: {{ robotsGetterFoo }}
+    <br /> -->
+
     <header>
       <nav>
         <ul>
@@ -14,19 +26,15 @@
             <router-link class="nav-link" :to="{name: 'Build'}" exact>Build</router-link>
           </li>
           <li class="nav-item cart">
-            <router-link class="nav-link" to='/cart' exact>
-              Cart
-            </router-link>
-            <div class="cart-items">
-              {{ cart.length }}
-            </div>
+            <router-link class="nav-link" to="/cart" exact>Cart</router-link>
+            <div class="cart-items">{{ cart.length }}</div>
           </li>
         </ul>
       </nav>
     </header>
     <div class="container">
       <aside class="aside">
-        <router-view name='sidebar' />
+        <router-view name="sidebar" />
       </aside>
       <main>
         <router-view />
@@ -38,16 +46,28 @@
 <script>
 // import HomePage from './components/home/HomePage.vue';
 // import RobotBuilder from './components/build/RobotBuilder.vue';
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "App",
-  components: {
-    
-  },
+  components: {},
   computed: {
-    cart(){
+    cart() {
       return this.$store.state.robots.cart;
-    }
+    },
+
+    ...mapState({ 
+      rootFoo: "foo", 
+      robotsFoo: state => state.robots.foo,
+      usersFoo: state => state.users.foo
+    }),
+
+    // this way only works for namespaced module
+    ...mapState('robots', { robotsFoo: 'foo', }),
+    ...mapGetters({rootGetterFoo: 'foo'}),
+
+    // this only works for namespaed module
+    ...mapGetters('robots', {robotsGetterFoo: 'foo'})
   }
 };
 </script>
@@ -106,13 +126,13 @@ ul {
   color: white;
 }
 
-.container{
+.container {
   display: flex;
   margin: 10px auto 0 auto;
   justify-content: center;
 }
 
-.aside{
+.aside {
   padding: 30px;
   background-color: #aaa;
   width: 100px;

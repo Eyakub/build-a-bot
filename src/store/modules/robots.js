@@ -5,6 +5,7 @@ export default {
   state: {
     cart: [],
     parts: null,
+    foo: 'robots-foo',
   },
 
   // all changes must go throw mutations, cant direct to state
@@ -37,5 +38,8 @@ export default {
     cartSaleItems(state){
       return state.cart.filter(item => item.head.onSale);
     },
+    foo(state){
+      return `robots-getter/${state.foo}`;
+    }
   }
 }

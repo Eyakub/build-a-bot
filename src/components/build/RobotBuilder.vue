@@ -1,5 +1,5 @@
 <template>
-  <div v-if='availableParts' class="content">
+  <div v-if="availableParts" class="content">
     <div class="preview">
       <CollapsibleSection>
         <div class="preview-content">
@@ -59,7 +59,6 @@
         @partSelected="part => selectedRobot.base=part"
       />
     </div>
-    
   </div>
 </template>
 
@@ -78,7 +77,7 @@ export default {
       const response = confirm(
         "You have not added your robot to your card, are you sure you want to leave?"
       );
-      next(response)
+      next(response);
     }
   },
   components: { PartSelector, CollapsibleSection },
@@ -99,7 +98,7 @@ export default {
 
   mixins: [createdHookMixin],
   created() {
-    this.$store.dispatch('getParts')
+    this.$store.dispatch("getParts");
   },
   computed: {
     headBorderStyle() {
@@ -109,14 +108,14 @@ export default {
           : "3px solid #aaa"
       };
     },
-    
+
     saleBorderClass() {
       return this.selectedRobot.head.onSale ? "sale-border" : "";
     },
 
-    availableParts(){
-      return this.$store.state.parts;
-    },
+    availableParts() {
+      return this.$store.state.robots.parts;
+    }
   },
 
   methods: {
@@ -129,7 +128,11 @@ export default {
         robot.rightArm.cost +
         robot.base.cost;
 
-      this.$store.dispatch('addRobotToCart', Object.assign({}, robot, { cost }))
+      // storing data to cart thn dispatch data 
+      // from the store thn go to the CART router(then comes from axios return)
+      this.$store
+        .dispatch("addRobotToCart", Object.assign({}, robot, { cost }))
+        .then(() => this.$router.push("/cart"));
       // as we got the robot object, so adding the cost variable to the robot obj
       // this following way
       // this.cart.push();
